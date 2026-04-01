@@ -1,0 +1,73 @@
+{
+  "metadata": {
+    "name": "Atharva Tayade",
+    "extracted_at": "2026-03-31"
+  },
+  "sections": {
+    "Header": [
+      "Atharva Tayade",
+      "•   •",
+      "M +91 8369197502 • E athutayade@gmail.com • W github.com/atharvax28",
+      "in atharva-w-5565442a3"
+    ],
+    "Profile": [
+      "Full-stack engineer and AI systems builder with production experience spanning backend architecture, ML pipelines,",
+      "reinforcement learning, and cybersecurity. Fintech-oriented with hands-on exposure to NBFC credit infrastructure,",
+      "MSME lending, adaptive scraping pipelines, LLM integration, and CI/CD-ready codebases."
+    ],
+    "Technical Skills": [
+      "Languages: Python, JavaScript, TypeScript, C, C++, SQL, Bash",
+      "Frontend: React, Next.js, Vue.js, Tailwind CSS, D3.js, React Flow, WebRTC, WebSockets, HTML5, CSS3",
+      "Mobile: React Native, Expo, Flutter",
+      "Backend: Node.js, Express, FastAPI, Flask, .NET Core, REST APIs, JWT, Microservices, Async I/O",
+      "ML / AI: PyTorch, scikit-learn, XGBoost, SHAP, Feature Engineering, Anomaly Detection, LLM Integration, Claude API",
+      "Scraping: Scrapy, BeautifulSoup, Selenium, Playwright, DNS/WHOIS Parsing, Adaptive Pipelines, ETL",
+      "Database: PostgreSQL, MongoDB, MySQL, SQL Server, Redis",
+      "Infrastructure: Docker, AWS EC2, Linux, Git, CI/CD, Vercel, Netlify, Make (Integromat), Zapier",
+      "Static Sites: Pretext, Hugo, Jekyll",
+      "Domains: Fintech, Credit Risk, MSME Lending, KYC/KYB, System Design, Real-time Systems, Automation"
+    ],
+    "Professional Experience": [
+      "Full-Stack Developer Mumbai, India",
+      "Software Developer — Freelance 2023 – Present",
+      "Architected editorial-grade portfolio for a senior workplace designer with split-hero, live stat counters, 6-project carousel, Core Expertise grid, and CV download CTA. Stack: TypeScript, CSS, HTML. Live: aakankshaxtayade.vercel.app",
+      "Engineered full-scale portfolio for an 18-year interior contracting studio with video hero, category-filtered gallery, contact routing, and lead enquiry form with validation. Stack: TypeScript, CSS, JavaScript. Live: axiomdesigns.vercel.app",
+      "Developed gated branded portfolio with password-protected access, session management, and custom visual identity. Stack: TypeScript, Tailwind CSS, HTML. Live: strokesdesigns.netlify.app",
+      "Built developer resource aggregation platform with D3.js-powered filtering, advanced search, and dynamic content rendering across 1,000+ entries. Stack: Next.js, React, TypeScript, D3.js, Tailwind CSS. Live: ath-framework.vercel.app",
+      "Sumati.io Remote",
+      "Software Engineering Intern Jan 2024 – Mar 2024",
+      "Engineered full-stack policy generation modules in React.js and .NET Core; profiled and resolved rendering bottlenecks cutting page load times by 45%",
+      "Built a real-time observability dashboard tracking live API metrics with Serilog ingestion; implemented JWT auth and containerised stack on AWS EC2 via Docker",
+      "Maharashtra State Electricity Board (MSEB) Vashi, Navi Mumbai",
+      "Engineering Intern Dec 2024 – Jan 2025",
+      "Monitored operational data from HT/LT distribution equipment across an active urban grid, analysing fault patterns and load management workflows applicable to IoT-based real-time data pipelines"
+    ],
+    "Education": [
+      "Fr. C. Rodrigues Institute of Technology (FCRIT) Vashi, India",
+      "B.Tech Nov 2022 – May 2026"
+    ],
+    "Technical Projects": [
+      "Demo: vri.cred",
+      "MSME Credit Intelligence Platform",
+      "Designed and built an AI-powered credit assessment platform targeting Indian NBFCs and DSAs — FastAPI async engine receives a GST number, validates it, checks Redis cache, fires all external API calls (bureau, GST, bank statement) in parallel, sends data to XGBoost scorer, passes score to Claude API for narrative report generation, saves report, and returns structured response to the lender. Full pipeline completes in ~90 seconds",
+      "Architected bureau API integration via aggregator middleware (Surepass, Karza, FinBox), SHAP explainability layer for RBI-compliant credit decision transparency, and full DPDP Act-aware data handling",
+      "Stack: FastAPI, XGBoost, SHAP, Claude API, PostgreSQL, Redis, React, Docker, AWS Mumbai",
+      "Adaptive Web Scraping Pipeline",
+      "Engineered a site-adaptive scraping framework that automatically detects and routes to the appropriate extraction strategy: static HTML (Scrapy/BeautifulSoup), JavaScript-rendered SPAs (Playwright/Selenium with headless Chrome), paginated APIs (direct endpoint extraction), and hybrid multi-stage sites",
+      "Implemented content-fingerprinting heuristics to classify site type before dispatching the correct scraper; includes proxy rotation, rate limiting, retry logic with exponential backoff, and structured ETL output to PostgreSQL",
+      "Stack: Python, Scrapy, BeautifulSoup, Playwright, Selenium, PostgreSQL, Docker",
+      "AI Job Lead Generation Automation",
+      "Built an end-to-end automation workflow that scrapes job listings and company signals, passes them through Claude API for relevance scoring and personalised outreach generation, and routes qualified leads through Make (Integromat) and Zapier workflows to a structured CRM pipeline with follow-up scheduling",
+      "Automation triggers daily, deduplicates seen leads via Redis, and outputs scored prospect sheets with AI-drafted application content",
+      "Stack: Python, Claude API, Make, Zapier, Scrapy, Redis, PostgreSQL",
+      "AI Workflow Automation Builder",
+      "Designed and implemented a drag-and-drop visual pipeline builder for composing multi-step AI workflows with real-time peer collaboration over WebRTC",
+      "Architected async node execution engine with live state synchronisation across connected clients using WebSocket broadcasting",
+      "Stack: React.js, Node.js, React Flow, WebRTC, MongoDB, Docker",
+      "OSINT Intelligence Platform",
+      "Engineered automated data intelligence tool aggregating structured data from DNS, WHOIS, and public databases into a classified threat registry; trained PyTorch classifier achieving 89% accuracy across phishing, malware, and C2 threat categories",
+      "Built Scrapy spider network with custom middleware for rate limiting, proxy rotation, retry logic, and downstream ETL into PostgreSQL with feature normalisation for model input",
+      "Stack: Python, Scrapy, PyTorch, PostgreSQL, FastAPI, React"
+    ]
+  }
+}

@@ -8,8 +8,10 @@ const nextConfig = {
   turbopack: {
     root: dirname(fileURLToPath(import.meta.url)),
   },
+  output: "export",
   images: {
     formats: ["image/avif", "image/webp"],
+    unoptimized: true,
   },
 };
 

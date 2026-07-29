@@ -1,0 +1,211 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ---------------------------------------------------------------------------
+   Tokens
+   paper / ink / machine / muted / signal / rule
+   `signal` replaces the template's #dc2626. It marks one thing only: a duplicate
+   collapsing in the hero ledger, the live dot, and hover states.
+--------------------------------------------------------------------------- */
+
+@theme {
+  --color-paper: #ffffff;
+  --color-ink: #0a0a0a;
+  --color-machine: #111111;
+  --color-muted: #71717a;
+  --color-signal: #ff4d00;
+  --color-rule: #e4e4e7;
+
+  --font-display: var(--font-clash-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-display) !important;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Force the font on everything for absolute certainty to match template */
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  div,
+  li,
+  nav,
+  section,
+  main {
+    font-family: var(--font-display) !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    font-family: inherit;
+  }
+
+  /* Display face is opt-in per element, not forced onto the whole document. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    margin: 0;
+  }
+
+  h5,
+  h6,
+  p {
+    margin: 0;
+  }
+
+  h1 {
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+
+  /* Keyboard users must always see where they are. */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Custom cursor
+   The template hid the native cursor globally. That strands anyone on touch or a
+   device without a fine pointer, so it is now gated to fine pointers only.
+--------------------------------------------------------------------------- */
+
+@media (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor * {
+    cursor: none;
+  }
+}
+
+.cursor-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+@layer utilities {
+  .mix-blend-difference {
+    mix-blend-mode: difference;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion
+--------------------------------------------------------------------------- */
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 8px rgba(255, 77, 0, 0.35);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 20px rgba(255, 77, 0, 0.85);
+    transform: scale(1.1);
+  }
+
+  100% {
+    box-shadow: 0 0 8px rgba(255, 77, 0, 0.35);
+    transform: scale(1);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-reveal {
+  animation: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Selection
+--------------------------------------------------------------------------- */
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+::-moz-selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}

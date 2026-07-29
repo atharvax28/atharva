@@ -114,7 +114,7 @@ const DedupLedger = () => {
       aria-label="Illustration of the job pipeline deduplicating a typical day of listings"
     >
       {/* Header: what this is, stated plainly so it is never mistaken for live data */}
-      <div className="mb-4 sm:mb-8 flex items-start justify-between gap-4 border-b border-white/10 pb-4 sm:pb-6">
+      <div className="mb-4 sm:mb-8 flex flex-col sm:flex-row items-start justify-between gap-4 border-b border-white/10 pb-4 sm:pb-6 mt-16 sm:mt-0">
         <div>
           <p className="text-[10px] uppercase tracking-[0.22em] text-white/40">
             Job pipeline
@@ -123,7 +123,7 @@ const DedupLedger = () => {
             Typical daily run
           </p>
         </div>
-        <div className="flex gap-6 text-right sm:gap-9">
+        <div className="flex gap-6 text-left sm:text-right sm:gap-9">
           <div>
             <span
               ref={inRef}

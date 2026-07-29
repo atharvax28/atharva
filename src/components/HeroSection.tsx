@@ -39,7 +39,7 @@ const HeroText = ({
       aria-hidden={color === "text-white"}
     >
       <div className="w-full px-4 md:px-8">
-        <h1 className="m-0 flex w-full flex-col items-end p-0 text-[10vw] font-black uppercase leading-[0.95] md:leading-[0.8] tracking-[-0.05em] whitespace-nowrap">
+        <h1 className="m-0 flex w-full flex-col items-end p-0 text-[10vw] font-black uppercase leading-[1.1] md:leading-[0.8] tracking-[-0.05em] whitespace-nowrap">
           <span className={`hero-line-${key} block opacity-0`}>
             Built to
           </span>

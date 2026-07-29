@@ -110,11 +110,11 @@ const DedupLedger = () => {
   return (
     <div
       ref={rootRef}
-      className="flex h-full w-full flex-col justify-end md:justify-center pb-20 md:pb-0 bg-machine pl-6 pr-32 py-10 font-mono sm:pl-10 md:pr-48 lg:pr-64"
+      className="flex h-full w-full flex-col justify-end md:justify-center pb-28 sm:pb-20 md:pb-0 bg-machine pl-4 sm:pl-6 pr-4 sm:pr-32 pt-24 sm:py-10 font-mono md:pr-48 lg:pr-64"
       aria-label="Illustration of the job pipeline deduplicating a typical day of listings"
     >
       {/* Header: what this is, stated plainly so it is never mistaken for live data */}
-      <div className="mb-8 flex items-start justify-between gap-4 border-b border-white/10 pb-6">
+      <div className="mb-4 sm:mb-8 flex items-start justify-between gap-4 border-b border-white/10 pb-4 sm:pb-6">
         <div>
           <p className="text-[10px] uppercase tracking-[0.22em] text-white/40">
             Job pipeline
@@ -150,14 +150,14 @@ const DedupLedger = () => {
       </div>
 
       {/* The ledger */}
-      <ul className="space-y-[7px] text-[11px] leading-none sm:text-xs">
-        {ROWS.map((row) => (
+      <ul className="space-y-[5px] sm:space-y-[7px] text-[10px] sm:text-xs leading-none">
+        {ROWS.map((row, i) => (
           <li
             key={row.id}
             data-row={row.dupe ? "dupe" : "keep"}
-            className="flex items-center gap-3 opacity-0 sm:gap-4"
+            className={`flex items-center gap-2 sm:gap-4 opacity-0 ${i >= 5 ? "hidden sm:flex" : ""}`}
           >
-            <span className="w-9 shrink-0 text-white/25">{row.id}</span>
+            <span className="w-8 sm:w-9 shrink-0 text-white/25">{row.id}</span>
 
             <span className="min-w-0 flex-1 truncate text-white/70">
               <span className="relative inline-block">
@@ -172,14 +172,14 @@ const DedupLedger = () => {
               </span>
             </span>
 
-            <span className="w-20 shrink-0 text-right text-white/25 sm:w-24">
+            <span className="w-16 sm:w-24 shrink-0 text-right text-white/25">
               {row.source}
             </span>
           </li>
         ))}
       </ul>
 
-      <p className="mt-8 border-t border-white/10 pt-5 text-[10px] leading-relaxed text-white/30">
+      <p className="mt-6 sm:mt-8 border-t border-white/10 pt-4 sm:pt-5 text-[9px] sm:text-[10px] leading-relaxed text-white/30">
         Three-layer Redis dedupe. The same role posted to a board, an aggregator, and a
         recruiter feed counts once.
       </p>

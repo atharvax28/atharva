@@ -70,13 +70,14 @@ const StatusWidget = () => {
   }, []);
 
   const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      setIsPlaying(true);
+      audio.play().catch(() => setIsPlaying(false));
     }
   };
 
@@ -87,9 +88,9 @@ const StatusWidget = () => {
         <div className="flex items-center gap-5">
           {/* Signal Bars */}
           <div className="flex items-end gap-[4px] h-[18px]">
-            <div className={`w-[5px] bg-white transition-all duration-300 ${isPlaying ? 'h-full animate-pulse' : 'h-[6px]'}`}></div>
-            <div className={`w-[5px] bg-white transition-all duration-300 ${isPlaying ? 'h-full animate-pulse delay-75' : 'h-[12px]'}`}></div>
-            <div className={`w-[5px] bg-white transition-all duration-300 ${isPlaying ? 'h-full animate-pulse delay-150' : 'h-full'}`}></div>
+            <div className={`w-[5px] bg-white transition-[height] duration-300 ${isPlaying ? 'h-full animate-pulse' : 'h-[6px]'}`}></div>
+            <div className={`w-[5px] bg-white transition-[height] duration-300 ${isPlaying ? 'h-full animate-pulse delay-75' : 'h-[12px]'}`}></div>
+            <div className={`w-[5px] bg-white transition-[height] duration-300 ${isPlaying ? 'h-full animate-pulse delay-150' : 'h-full'}`}></div>
           </div>
           
           <div className="flex flex-col">
@@ -128,7 +129,7 @@ const StatusWidget = () => {
         </div>
       </div>
       
-      <audio ref={audioRef} src="/audio/power_instrumental.mp3" loop preload="none" />
+      <audio ref={audioRef} src="/audio/power_instrumental.mp3" loop preload="metadata" />
     </div>
   );
 };

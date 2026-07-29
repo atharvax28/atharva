@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-const WORDS = ["AUTOMATE", "THE", "PART", "YOU", "KEEP", "DOING", "TWICE"];
+import { useGSAP } from "@gsap/react";
+import { manifestoWords } from "@/data/profile";
 
 const ManifestoSection = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -12,14 +12,14 @@ const ManifestoSection = () => {
   const counterRef = useRef<HTMLDivElement | null>(null);
   const scatterRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!sectionRef.current) return;
     gsap.registerPlugin(ScrollTrigger);
 
     // clear any previous refs
-    wordRefs.current = wordRefs.current.slice(0, WORDS.length);
+    wordRefs.current = wordRefs.current.slice(0, manifestoWords.length);
 
-    const endPercent = WORDS.length * 15; // shorten pinned scroll distance to avoid large empty area
+    const endPercent = manifestoWords.length * 15; // shorten pinned scroll distance to avoid large empty area
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -52,20 +52,15 @@ const ManifestoSection = () => {
         0
       );
     }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
-      tl.kill();
-    };
-  }, []);
+  }, { scope: sectionRef });
 
   return (
     <section ref={sectionRef} className="relative w-full bg-white">
-      <div style={{ height: `${WORDS.length * 15}vh` }}>
+      <div style={{ height: `${manifestoWords.length * 15}vh` }}>
         <div className="sticky top-0 h-screen w-full flex items-center">
           <div className="w-full px-4 md:px-8">
             <div className="w-full h-[30vh] md:h-[40vh] lg:h-[36vh] flex flex-col justify-center gap-2 md:gap-3 lg:gap-4">
-              {WORDS.map((word, i) => (
+              {manifestoWords.map((word, i) => (
                 <div
                   key={word + i}
                   ref={(el) => {

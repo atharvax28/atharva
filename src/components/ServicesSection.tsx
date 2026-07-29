@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 import { disciplines } from "@/data/stack";
 
@@ -16,7 +15,7 @@ const ServicesSection = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const titleRefs = useRef<HTMLDivElement[]>([]);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!sectionRef.current) return;
 
     const items = titleRefs.current.slice(0, services.length);
@@ -58,12 +57,10 @@ const ServicesSection = () => {
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((st) => st.kill());
-      tl.kill();
       // reset inline height
       if (sectionRef.current) sectionRef.current.style.height = "";
     };
-  }, []);
+  }, { scope: sectionRef });
 
   return (
     <section id="services" className="w-full bg-white">
@@ -74,7 +71,7 @@ const ServicesSection = () => {
               {/* Heading moved inside the pinned area so it remains visible while items stack */}
               <div className="pb-10 border-b border-black mb-12">
                 <h2 className="text-[12vw] md:text-[8vw] font-black uppercase tracking-tighter text-black leading-[0.8]">
-                  What I build
+                  Services
                 </h2>
               </div>
 

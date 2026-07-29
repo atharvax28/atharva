@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 import { experience, freelance } from "@/data/experience";
 
@@ -10,7 +11,7 @@ const ExperienceSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const headingRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!containerRef.current || !headingRef.current) return;
     if (typeof window === "undefined") return;
     if (!window.matchMedia("(min-width: 768px)").matches) return;
@@ -19,7 +20,7 @@ const ExperienceSection: React.FC = () => {
     gsap.registerPlugin(ScrollTrigger);
     const container = containerRef.current;
 
-    const st = ScrollTrigger.create({
+    ScrollTrigger.create({
       trigger: container,
       start: "top top",
       end: () => `+=${container.offsetHeight - 200}`,
@@ -28,7 +29,7 @@ const ExperienceSection: React.FC = () => {
       anticipatePin: 1,
     });
 
-    const reveal = gsap.fromTo(
+    gsap.fromTo(
       ".role-item",
       { opacity: 0, y: 20 },
       {
@@ -42,13 +43,7 @@ const ExperienceSection: React.FC = () => {
     );
 
     ScrollTrigger.refresh();
-
-    return () => {
-      st.kill();
-      reveal.scrollTrigger?.kill();
-      reveal.kill();
-    };
-  }, []);
+  }, { scope: containerRef });
 
   return (
     <section

@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { Github, Globe, ArrowUpRight } from "lucide-react";
 
 import { projects } from "@/data/projects";
@@ -16,31 +17,27 @@ export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const ctx = gsap.context(() => {
-      gsap.from(".projects-heading span", {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.out",
-        scrollTrigger: { trigger: ".projects-heading", start: "top 80%" },
-      });
+    gsap.from(".projects-heading span", {
+      y: 100,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: "power4.out",
+      scrollTrigger: { trigger: ".projects-heading", start: "top 80%" },
+    });
 
-      gsap.from(".project-card-wrapper", {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-        scrollTrigger: { trigger: containerRef.current, start: "top 70%" },
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+    gsap.from(".project-card-wrapper", {
+      y: 50,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "power3.out",
+      scrollTrigger: { trigger: containerRef.current, start: "top 70%" },
+    });
+  }, { scope: sectionRef });
 
   return (
     <section
@@ -74,12 +71,13 @@ export default function ProjectsSection() {
             <div key={project.id} className="project-card-wrapper group">
               <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-2xl bg-zinc-100 md:aspect-[16/10]">
                 <Link
-                  href={`/projects/${project.slug}`}
+                  href={project.visual === "shot" && !project.image && project.websiteUrl ? project.websiteUrl : `/projects/${project.slug}`}
+                  target={project.visual === "shot" && !project.image && project.websiteUrl ? "_blank" : undefined}
                   data-cursor="project"
                   className="absolute inset-0 z-10 block"
                   aria-label={`${project.name} — read more`}
                 >
-                  {project.visual === "shot" && project.image ? (
+                  {project.websiteUrl && project.image ? (
                     <Image
                       src={project.image}
                       alt={`${project.name} interface`}
@@ -87,11 +85,30 @@ export default function ProjectsSection() {
                       className="object-cover object-top transition-all duration-700 ease-out group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                  ) : (
+                  ) : project.visual === "diagram" ? (
                     <PipelineDiagram
                       stages={project.stages ?? []}
                       label={project.name}
                     />
+                  ) : (
+                    <div className="flex h-full w-full flex-col items-center justify-center bg-white p-8 transition-transform duration-700 ease-out group-hover:scale-105 text-center">
+                      <span className="mb-4 text-3xl font-black uppercase tracking-tighter text-black md:text-4xl">
+                        {project.name}
+                      </span>
+                      <p className="mb-6 max-w-sm text-sm font-medium leading-relaxed text-zinc-500">
+                        {project.description}
+                      </p>
+                      <div className="flex flex-wrap justify-center gap-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="rounded border border-zinc-200 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-zinc-400 bg-zinc-50"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   )}
 
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -138,7 +155,12 @@ export default function ProjectsSection() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="mb-2 text-2xl font-black uppercase tracking-tighter transition-colors group-hover:text-signal md:text-3xl">
-                    <Link href={`/projects/${project.slug}`}>{project.name}</Link>
+                    <Link 
+                      href={project.visual === "shot" && !project.image && project.websiteUrl ? project.websiteUrl : `/projects/${project.slug}`}
+                      target={project.visual === "shot" && !project.image && project.websiteUrl ? "_blank" : undefined}
+                    >
+                      {project.name}
+                    </Link>
                   </h3>
                   <p className="max-w-sm text-sm font-medium leading-relaxed text-muted">
                     {project.description}

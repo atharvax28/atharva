@@ -36,7 +36,7 @@ export default async function ProjectPage({
 
   if (!project) notFound();
 
-  const hasShot = project.visual === "shot" && project.image;
+  const hasShot = project.visual === "shot" && project.image && project.websiteUrl;
 
   return (
     <div className="min-h-screen bg-paper text-ink">
@@ -69,7 +69,7 @@ export default async function ProjectPage({
               className="object-cover object-top"
               priority
             />
-          ) : (
+          ) : project.visual === "diagram" ? (
             <div className="mx-auto flex h-full max-w-4xl items-center justify-center px-6 py-16">
               <div className="relative h-full w-full overflow-hidden rounded-xl border border-white/10 bg-machine shadow-2xl">
                 <div className="absolute left-0 top-0 flex h-8 w-full items-center gap-2 border-b border-white/10 bg-white/5 px-4 z-10">
@@ -81,6 +81,12 @@ export default async function ProjectPage({
                   <PipelineDiagram stages={project.stages ?? []} label={project.name} />
                 </div>
               </div>
+            </div>
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-white">
+              <span className="text-5xl font-black uppercase tracking-tighter text-black text-center px-6 md:text-7xl">
+                {project.name}
+              </span>
             </div>
           )}
         </div>

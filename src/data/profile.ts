@@ -15,7 +15,7 @@ export const profile = {
   github: "https://github.com/atharvax28",
   githubLabel: "github.com/atharvax28",
   site: "https://atharvax1.vercel.app",
-  resume: "/resume.pdf",
+  resume: "/Atharva_Tayade_Software_Engineer.pdf",
 } as const;
 
 export const education = {
@@ -28,3 +28,5 @@ export const education = {
 /** Hero standfirst. Every number below is carried over from the resume context. */
 export const intro =
   "I build systems that keep running when nobody is watching them. Pipelines, scrapers, and scoring models, plus the web platforms they sit behind.";
+
+export const manifestoWords = ["AUTOMATE", "THE", "PART", "YOU", "KEEP", "DOING", "TWICE"];

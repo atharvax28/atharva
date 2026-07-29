@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 import { stack } from "@/data/stack";
 
@@ -10,7 +11,7 @@ const TechStackSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const headingRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!containerRef.current || !headingRef.current) return;
     if (typeof window === "undefined") return;
     // Pinning only earns its keep on a wide viewport with motion allowed.
@@ -20,21 +21,17 @@ const TechStackSection: React.FC = () => {
     gsap.registerPlugin(ScrollTrigger);
     const container = containerRef.current;
 
-    const st = ScrollTrigger.create({
+    ScrollTrigger.create({
       trigger: container,
       start: "top top",
-      end: () => `+=${container.offsetHeight}`,
+      end: () => `bottom top+=${(headingRef.current?.offsetHeight || 0) + 112}`,
       pin: headingRef.current,
       pinSpacing: false,
       anticipatePin: 1,
     });
 
     ScrollTrigger.refresh();
-
-    return () => {
-      st.kill();
-    };
-  }, []);
+  }, { scope: containerRef });
 
   return (
     <section id="stack" ref={containerRef} className="w-full bg-paper py-20 md:py-28">

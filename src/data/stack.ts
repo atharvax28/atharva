@@ -43,8 +43,8 @@ export const stack: Tech[] = [
 
 /** Stacked titles in the "What I build" section. */
 export const disciplines = [
-  "FULL-STACK WEB",
-  "AI & AUTOMATION",
-  "DATA PIPELINES",
-  "FREELANCE BUILDS",
+  "WEB DEVELOPMENT",
+  "UX/UI DESIGN",
+  "APP DEVELOPMENT",
+  "BRAND DESIGN",
 ];

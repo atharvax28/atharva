@@ -40,30 +40,16 @@ export const projects: Project[] = [
     tags: ["FastAPI", "XGBoost", "SHAP", "AWS"],
   },
   {
-    id: "02",
-    name: "JOB PIPELINE",
-    slug: "job-aggregation-pipeline",
-    year: "2026",
-    description:
-      "A distributed scraper across 50+ job portals that turns 1,000+ raw listings into 500-750+ deduplicated leads a day.",
-    longDescription:
-      "Fifty-odd company job portals, no two built the same way: static HTML, JavaScript-rendered SPAs, paginated JSON APIs. The crawler detects which it is dealing with and dispatches the right strategy, so adding a source does not mean writing a new scraper.\n\nVolume was never the hard part. Deduplication was. The same role gets posted to a company board, an aggregator, and a recruiter feed under three different titles, and counting it three times makes the output useless. A three-layer Redis dedupe collapses 1,000+ daily listings down to 500-750+ genuinely distinct leads, which PostgreSQL then tracks through their lifecycle. The Claude API scores each one for relevance and drafts the outreach. APScheduler runs the whole cycle unattended.",
-    visual: "diagram",
-    stages: ["crawl", "extract", "dedupe", "classify", "queue"],
-    tags: ["Scrapy", "Playwright", "Claude API", "Redis"],
-  },
-  {
-    id: "03",
-    name: "SCRAPING ENGINE",
-    slug: "adaptive-scraping-engine",
+    id: "07",
+    name: "Axiom Designs",
+    slug: "axiom-designs",
     year: "2025",
-    description:
-      "A site-adaptive crawler holding about a 95% success rate across mixed, hostile sources.",
-    longDescription:
-      "The extraction layer underneath the job pipeline, kept separate because the problem generalises. It fingerprints a target before crawling it and routes to the matching strategy: Scrapy for static HTML, Playwright or Selenium for JavaScript-rendered pages, direct endpoint reads for paginated APIs.\n\nProxy rotation, rate limiting, and exponential-backoff retries keep it alive against sources that would rather it were not. It holds about a 95% success rate across its targets, and a deduplicating ETL layer normalises everything into PostgreSQL.",
-    visual: "diagram",
-    stages: ["fingerprint", "route", "fetch", "retry", "normalise"],
-    tags: ["Scrapy", "Playwright", "PostgreSQL", "Docker"],
+    description: "Freelance web design and development studio.",
+    longDescription: "A premium freelance web design studio focusing on high-performance, conversion-optimised websites for modern brands.\n\nNote: Password for all locked websites is ace08.",
+    visual: "shot",
+    image: "/projects/axiom.png",
+    websiteUrl: "https://axiomdesigns.vercel.app",
+    tags: ["Freelance", "React", "Next.js"],
   },
   {
     id: "04",
@@ -81,6 +67,54 @@ export const projects: Project[] = [
     tags: ["React", "D3.js", "Scrapy", "PostgreSQL"],
   },
   {
+    id: "08",
+    name: "Aakanksha Tayade",
+    slug: "aakanksha-tayade",
+    year: "2025",
+    description: "Personal portfolio and professional showcase.",
+    longDescription: "A custom portfolio design with interactive elements and optimized performance.\n\nNote: Password for all locked websites is ace08.",
+    visual: "shot",
+    websiteUrl: "https://aakankshaxtayade.vercel.app/login",
+    tags: ["Freelance", "React", "Design"],
+  },
+  {
+    id: "09",
+    name: "Strokes Designs",
+    slug: "strokes-designs",
+    year: "2025",
+    description: "Creative agency portfolio and services platform.",
+    longDescription: "A creative platform designed to showcase digital art and design services.\n\nNote: Password for all locked websites is ace08.",
+    visual: "shot",
+    websiteUrl: "https://strokesdesigns.netlify.app",
+    tags: ["Freelance", "UI/UX", "Next.js"],
+  },
+  {
+    id: "02",
+    name: "JOB PIPELINE",
+    slug: "job-aggregation-pipeline",
+    year: "2026",
+    description:
+      "A distributed scraper across 50+ job portals that turns 1,000+ raw listings into 500-750+ deduplicated leads a day.",
+    longDescription:
+      "Fifty-odd company job portals, no two built the same way: static HTML, JavaScript-rendered SPAs, paginated JSON APIs. The crawler detects which it is dealing with and dispatches the right strategy, so adding a source does not mean writing a new scraper.\n\nVolume was never the hard part. Deduplication was. The same role gets posted to a company board, an aggregator, and a recruiter feed under three different titles, and counting it three times makes the output useless. A three-layer Redis dedupe collapses 1,000+ daily listings down to 500-750+ genuinely distinct leads, which PostgreSQL then tracks through their lifecycle. The Claude API scores each one for relevance and drafts the outreach. APScheduler runs the whole cycle unattended.",
+    visual: "shot",
+    image: "/projects/job-pipeline.png",
+    tags: ["Scrapy", "Playwright", "Claude API", "Redis"],
+  },
+  {
+    id: "03",
+    name: "SCRAPING ENGINE",
+    slug: "adaptive-scraping-engine",
+    year: "2025",
+    description:
+      "A site-adaptive crawler holding about a 95% success rate across mixed, hostile sources.",
+    longDescription:
+      "The extraction layer underneath the job pipeline, kept separate because the problem generalises. It fingerprints a target before crawling it and routes to the matching strategy: Scrapy for static HTML, Playwright or Selenium for JavaScript-rendered pages, direct endpoint reads for paginated APIs.\n\nProxy rotation, rate limiting, and exponential-backoff retries keep it alive against sources that would rather it were not. It holds about a 95% success rate across its targets, and a deduplicating ETL layer normalises everything into PostgreSQL.",
+    visual: "shot",
+    image: "/projects/scraping-engine.png",
+    tags: ["Scrapy", "Playwright", "PostgreSQL", "Docker"],
+  },
+  {
     id: "05",
     name: "OSINT AGGREGATOR",
     slug: "osint-aggregator",
@@ -89,8 +123,8 @@ export const projects: Project[] = [
       "DNS, WHOIS, and public-record aggregation with a PyTorch classifier labelling signals at 89% accuracy.",
     longDescription:
       "Open-source intelligence is scattered across DNS records, WHOIS registries, and public databases that share no format and no schema. A Scrapy spider network with custom middleware collects from all of them, handling the rate limiting and retries each source demands.\n\nA PyTorch classifier then labels the collected signals, reaching 89% accuracy on a held-out test set. Everything lands in PostgreSQL with features normalised for model input.",
-    visual: "diagram",
-    stages: ["dns", "whois", "public db", "normalise", "classify"],
+    visual: "shot",
+    image: "/projects/osint-aggregator.png",
     githubUrl: "https://github.com/atharvax28/OSINT-Framework",
     tags: ["Scrapy", "PyTorch", "FastAPI", "React"],
   },
@@ -103,8 +137,8 @@ export const projects: Project[] = [
       "A gradient boosting model on match data, built as a study in calibration rather than a chase for accuracy.",
     longDescription:
       "A gradient boosting model predicting IPL match outcomes from historical data, taken end to end: collection, cleaning, and feature engineering.\n\nThe interesting result was not the accuracy number. Sports data is noisy and low-signal, and a model that looks confident on it is usually wrong in a way that matters. So this became a study in calibration and in the limits of the data, comparing feature sets against each other rather than optimising for a headline figure.",
-    visual: "diagram",
-    stages: ["collect", "clean", "engineer", "train", "calibrate"],
+    visual: "shot",
+    image: "/projects/ipl-prediction.png",
     tags: ["scikit-learn", "XGBoost", "pandas", "Python"],
   },
 ];

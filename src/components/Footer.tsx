@@ -44,7 +44,7 @@ const Footer = () => {
             href={link.href}
             target={link.href.startsWith("http") ? "_blank" : undefined}
             rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-            className="font-display text-xl font-black uppercase text-white transition-colors hover:text-signal md:text-3xl"
+            className="text-xl font-black uppercase text-white transition-colors hover:text-signal md:text-3xl"
           >
             {link.label}
           </a>
@@ -57,7 +57,7 @@ const Footer = () => {
             <span
               key={dup}
               aria-hidden={dup === 1}
-              className="marquee-content flex shrink-0 items-center gap-8 whitespace-nowrap pr-8 font-display text-base font-black text-white/80 md:text-3xl lg:text-5xl"
+              className="marquee-content flex shrink-0 items-center gap-8 whitespace-nowrap pr-8 text-base font-black text-white/80 md:text-3xl lg:text-5xl"
             >
               {[...Array(8)].map((_, i) => (
                 <span key={i}>{MARQUEE_TEXT}</span>

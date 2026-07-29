@@ -110,7 +110,7 @@ const DedupLedger = () => {
   return (
     <div
       ref={rootRef}
-      className="flex h-full w-full flex-col justify-center bg-machine px-6 py-10 font-mono sm:px-10"
+      className="flex h-full w-full flex-col justify-end md:justify-center pb-20 md:pb-0 bg-machine pl-6 pr-32 py-10 font-mono sm:pl-10 md:pr-48 lg:pr-64"
       aria-label="Illustration of the job pipeline deduplicating a typical day of listings"
     >
       {/* Header: what this is, stated plainly so it is never mistaken for live data */}

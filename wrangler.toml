@@ -1,0 +1,5 @@
+name = "atharva-portfolio"
+compatibility_date = "2024-03-20"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+account_id = "f61660d79598530c1b737695e6df2e88"

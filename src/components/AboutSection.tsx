@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+gsap.registerPlugin(ScrollTrigger);
 
 const text =
   "I like the problems that only appear at scale. The duplicate that arrives under a different name. The source that changes its markup overnight. The credit score nobody can defend to a regulator. Most of what I build is meant to survive contact with those while I am asleep, which means the interesting work is in the failure paths, not the happy one.";
@@ -16,7 +15,7 @@ const AboutSection = () => {
   const textRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!textRef.current || !sectionRef.current || !containerRef.current) return;
 
     // Reduced motion: leave the paragraph fully legible, skip the scrub entirely.
@@ -41,7 +40,7 @@ const AboutSection = () => {
     });
 
     // Pin the container at the bottom-left while letters animate
-    const pinST = ScrollTrigger.create({
+    ScrollTrigger.create({
       trigger: sectionRef.current,
       start: "top top",
       end: "bottom bottom",
@@ -78,12 +77,7 @@ const AboutSection = () => {
         });
       },
     });
-
-    return () => {
-      pinST.kill();
-      tl.kill();
-    };
-  }, []);
+  }, { scope: sectionRef });
 
   return (
     // 150vh gives the scroll room for the letter animation

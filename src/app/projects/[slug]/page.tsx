@@ -21,8 +21,17 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return { title: "Not found" };
   return {
-    title: `${project.name} — ${profile.name}`,
+    title: project.name,
     description: project.description,
+    openGraph: {
+      title: `${project.name} — ${profile.name}`,
+      description: project.description,
+      url: `${profile.site}/projects/${slug}`,
+      type: "article",
+    },
+    alternates: {
+      canonical: `${profile.site}/projects/${slug}`,
+    },
   };
 }
 

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -20,24 +20,71 @@ const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 const description =
-  "Software engineer in Mumbai building data pipelines, ML services, and the web platforms around them.";
+  "Atharva Tayade — Software engineer in Mumbai building data pipelines, ML services, scraping engines, and the web platforms around them.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.site),
-  title: "Atharva Tayade — Software Engineer",
+  title: {
+    default: "Atharva Tayade — Software Engineer | Data Pipelines & ML",
+    template: "%s — Atharva Tayade",
+  },
   description,
+  keywords: [
+    "Atharva Tayade",
+    "software engineer",
+    "Mumbai developer",
+    "data pipelines",
+    "machine learning",
+    "web scraping",
+    "full stack developer",
+    "FastAPI",
+    "Python",
+    "React",
+    "Next.js",
+  ],
+  authors: [{ name: "Atharva Tayade", url: profile.site }],
+  creator: "Atharva Tayade",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Atharva Tayade — Software Engineer",
     description,
     url: profile.site,
     siteName: "Atharva Tayade",
+    locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Atharva Tayade — Software Engineer",
     description,
+    creator: "@atharvax28",
   },
+  alternates: {
+    canonical: profile.site,
+  },
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/apple-touch-icon.png",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -56,6 +103,20 @@ export default function RootLayout({
               url: profile.site,
               email: profile.email,
               jobTitle: "Software Engineer",
+              description,
+              knowsAbout: [
+                "Data Pipelines",
+                "Machine Learning",
+                "Web Scraping",
+                "Python",
+                "FastAPI",
+                "React",
+                "Next.js",
+              ],
+              alumniOf: {
+                "@type": "CollegeOrUniversity",
+                name: "University of Mumbai",
+              },
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Mumbai",

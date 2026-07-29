@@ -14,7 +14,7 @@ export const profile = {
   linkedinLabel: "linkedin.com/in/atharvaa6",
   github: "https://github.com/atharvax28",
   githubLabel: "github.com/atharvax28",
-  site: "https://atharvax1.vercel.app",
+  site: "https://atharvadev.athutayade.workers.dev",
   resume: "/Atharva_Tayade_Software_Engineer.pdf",
 } as const;
 

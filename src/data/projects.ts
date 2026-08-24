@@ -13,6 +13,12 @@ export interface Project {
   websiteUrl?: string;
   githubUrl?: string;
   tags: string[];
+  /** Renders an "ongoing" chip on the card. Omit for finished work. */
+  status?: "ongoing";
+  /** Key into ProjectCover's icon map, for projects with no usable screenshot. */
+  coverIcon?: string;
+  /** A graphic mark shown at half size on paper, in place of a screenshot. */
+  coverMark?: string;
 }
 
 /**
@@ -24,6 +30,33 @@ export interface Project {
  * nlp-mppt-selector, wireless-power-transfer, axiomdesigns.vercel.app) must never appear.
  */
 export const projects: Project[] = [
+  {
+    id: "10",
+    name: "Bluero Bombay",
+    slug: "bluero-bombay",
+    year: "2026",
+    status: "ongoing",
+    description:
+      "Storefront for Bombay's first Turkish kumpir bar — menu, build-your-own, and where the stall turns up next.",
+    longDescription:
+      "A storefront for a food brand that does not have a fixed address yet: the menu, a build-your-own cup flow, the pop-up schedule, and the brand story on one page.\n\nThe rollout is still in progress — pop-up stalls across Mumbai now, with a first permanent store opening in Bandra — so the site is built to keep changing rather than to be finished. React on Vite, deployed on Vercel.",
+    visual: "shot",
+    image: "/projects/bluero.webp",
+    websiteUrl: "https://bluero-bombay.vercel.app",
+    tags: ["React", "Vite", "Freelance"],
+  },
+  {
+    id: "07",
+    name: "Axiom Designs",
+    slug: "axiom-designs",
+    year: "2025",
+    description: "Freelance web design and development studio.",
+    longDescription: "A premium freelance web design studio focusing on high-performance, conversion-optimised websites for modern brands.\n\nNote: Password for all locked websites is ace08.",
+    visual: "shot",
+    image: "/projects/axiom.png",
+    websiteUrl: "https://axiomdesignstudio.vercel.app",
+    tags: ["Freelance", "React", "Next.js"],
+  },
   {
     id: "01",
     name: "VRI CRED",
@@ -38,18 +71,6 @@ export const projects: Project[] = [
     websiteUrl: "https://vricred1.netlify.app",
     githubUrl: "https://github.com/atharvax28/vri.cred",
     tags: ["FastAPI", "XGBoost", "SHAP", "AWS"],
-  },
-  {
-    id: "07",
-    name: "Axiom Designs",
-    slug: "axiom-designs",
-    year: "2025",
-    description: "Freelance web design and development studio.",
-    longDescription: "A premium freelance web design studio focusing on high-performance, conversion-optimised websites for modern brands.\n\nNote: Password for all locked websites is ace08.",
-    visual: "shot",
-    image: "/projects/axiom.png",
-    websiteUrl: "https://axiomdesigns.vercel.app",
-    tags: ["Freelance", "React", "Next.js"],
   },
   {
     id: "04",
@@ -76,6 +97,7 @@ export const projects: Project[] = [
     visual: "shot",
     websiteUrl: "https://aakankshaxtayade.vercel.app/login",
     tags: ["Freelance", "React", "Design"],
+    coverIcon: "user-round",
   },
   {
     id: "09",
@@ -87,6 +109,7 @@ export const projects: Project[] = [
     visual: "shot",
     websiteUrl: "https://strokesdesigns.netlify.app",
     tags: ["Freelance", "UI/UX", "Next.js"],
+    coverIcon: "pen-tool",
   },
   {
     id: "02",
@@ -98,7 +121,7 @@ export const projects: Project[] = [
     longDescription:
       "Fifty-odd company job portals, no two built the same way: static HTML, JavaScript-rendered SPAs, paginated JSON APIs. The crawler detects which it is dealing with and dispatches the right strategy, so adding a source does not mean writing a new scraper.\n\nVolume was never the hard part. Deduplication was. The same role gets posted to a company board, an aggregator, and a recruiter feed under three different titles, and counting it three times makes the output useless. A three-layer Redis dedupe collapses 1,000+ daily listings down to 500-750+ genuinely distinct leads, which PostgreSQL then tracks through their lifecycle. The Claude API scores each one for relevance and drafts the outreach. APScheduler runs the whole cycle unattended.",
     visual: "shot",
-    image: "/projects/job-pipeline.png",
+    coverMark: "/projects/marks/wave.webp",
     tags: ["Scrapy", "Playwright", "Claude API", "Redis"],
   },
   {
@@ -111,7 +134,7 @@ export const projects: Project[] = [
     longDescription:
       "The extraction layer underneath the job pipeline, kept separate because the problem generalises. It fingerprints a target before crawling it and routes to the matching strategy: Scrapy for static HTML, Playwright or Selenium for JavaScript-rendered pages, direct endpoint reads for paginated APIs.\n\nProxy rotation, rate limiting, and exponential-backoff retries keep it alive against sources that would rather it were not. It holds about a 95% success rate across its targets, and a deduplicating ETL layer normalises everything into PostgreSQL.",
     visual: "shot",
-    image: "/projects/scraping-engine.png",
+    coverMark: "/projects/marks/asterisk.webp",
     tags: ["Scrapy", "Playwright", "PostgreSQL", "Docker"],
   },
   {
@@ -124,7 +147,7 @@ export const projects: Project[] = [
     longDescription:
       "Open-source intelligence is scattered across DNS records, WHOIS registries, and public databases that share no format and no schema. A Scrapy spider network with custom middleware collects from all of them, handling the rate limiting and retries each source demands.\n\nA PyTorch classifier then labels the collected signals, reaching 89% accuracy on a held-out test set. Everything lands in PostgreSQL with features normalised for model input.",
     visual: "shot",
-    image: "/projects/osint-aggregator.png",
+    coverMark: "/projects/marks/star.webp",
     githubUrl: "https://github.com/atharvax28/OSINT-Framework",
     tags: ["Scrapy", "PyTorch", "FastAPI", "React"],
   },
@@ -138,7 +161,7 @@ export const projects: Project[] = [
     longDescription:
       "A gradient boosting model predicting IPL match outcomes from historical data, taken end to end: collection, cleaning, and feature engineering.\n\nThe interesting result was not the accuracy number. Sports data is noisy and low-signal, and a model that looks confident on it is usually wrong in a way that matters. So this became a study in calibration and in the limits of the data, comparing feature sets against each other rather than optimising for a headline figure.",
     visual: "shot",
-    image: "/projects/ipl-prediction.png",
+    coverMark: "/projects/marks/flower.webp",
     tags: ["scikit-learn", "XGBoost", "pandas", "Python"],
   },
 ];

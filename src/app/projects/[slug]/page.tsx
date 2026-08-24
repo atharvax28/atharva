@@ -6,6 +6,7 @@ import { Github, Globe, ArrowLeft, ExternalLink } from "lucide-react";
 
 import { projects, getProject } from "@/data/projects";
 import PipelineDiagram from "@/components/PipelineDiagram";
+import ProjectCover from "@/components/ProjectCover";
 import Footer from "@/components/Footer";
 import { profile } from "@/data/profile";
 
@@ -45,7 +46,7 @@ export default async function ProjectPage({
 
   if (!project) notFound();
 
-  const hasShot = project.visual === "shot" && project.image && project.websiteUrl;
+  const hasShot = project.visual === "shot" && Boolean(project.image);
 
   return (
     <div className="min-h-screen bg-paper text-ink">
@@ -92,11 +93,11 @@ export default async function ProjectPage({
               </div>
             </div>
           ) : (
-            <div className="flex h-full w-full items-center justify-center bg-white">
-              <span className="text-5xl font-black uppercase tracking-tighter text-black text-center px-6 md:text-7xl">
-                {project.name}
-              </span>
-            </div>
+            <ProjectCover
+              icon={project.coverIcon}
+              mark={project.coverMark}
+              tags={project.tags}
+            />
           )}
         </div>
 

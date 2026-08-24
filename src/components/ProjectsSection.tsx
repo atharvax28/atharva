@@ -8,10 +8,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Github, Globe, ArrowUpRight } from "lucide-react";
 
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 import PipelineDiagram from "@/components/PipelineDiagram";
+import ProjectCover from "@/components/ProjectCover";
 
 if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * A project with no screenshot of its own has little to fill a detail page with, so
+ * its links go straight to the live site. Everything else opens its case study.
+ */
+const linkFor = (project: Project) =>
+  project.visual === "shot" && !project.image && project.websiteUrl
+    ? { href: project.websiteUrl, target: "_blank" as const }
+    : { href: `/projects/${project.slug}`, target: undefined };
 
 export default function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -53,8 +63,8 @@ export default function ProjectsSection() {
           </h2>
           <div className="mt-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
             <p className="max-w-md text-lg font-medium text-muted md:text-xl">
-              Six things I built and can still explain. Three have a screen; three are
-              pipelines, so they show their stages instead.
+              Things I built and can still explain — client storefronts, crawlers,
+              pipelines, and the models behind them.
             </p>
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-zinc-400">
               <span className="h-px w-12 bg-rule" />
@@ -71,13 +81,12 @@ export default function ProjectsSection() {
             <div key={project.id} className="project-card-wrapper group">
               <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-2xl bg-zinc-100 md:aspect-[16/10]">
                 <Link
-                  href={project.visual === "shot" && !project.image && project.websiteUrl ? project.websiteUrl : `/projects/${project.slug}`}
-                  target={project.visual === "shot" && !project.image && project.websiteUrl ? "_blank" : undefined}
+                  {...linkFor(project)}
                   data-cursor="project"
                   className="absolute inset-0 z-10 block"
                   aria-label={`${project.name} — read more`}
                 >
-                  {project.websiteUrl && project.image ? (
+                  {project.image ? (
                     <Image
                       src={project.image}
                       alt={`${project.name} interface`}
@@ -91,24 +100,11 @@ export default function ProjectsSection() {
                       label={project.name}
                     />
                   ) : (
-                    <div className="flex h-full w-full flex-col items-center justify-center bg-white p-8 transition-transform duration-700 ease-out group-hover:scale-105 text-center">
-                      <span className="mb-4 text-3xl font-black uppercase tracking-tighter text-black md:text-4xl">
-                        {project.name}
-                      </span>
-                      <p className="mb-6 max-w-sm text-sm font-medium leading-relaxed text-zinc-500">
-                        {project.description}
-                      </p>
-                      <div className="flex flex-wrap justify-center gap-2">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="rounded border border-zinc-200 px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-zinc-400 bg-zinc-50"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                    <ProjectCover
+                      icon={project.coverIcon}
+                      mark={project.coverMark}
+                      tags={project.tags}
+                    />
                   )}
 
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -124,6 +120,12 @@ export default function ProjectsSection() {
                   <span className="rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-black backdrop-blur-md">
                     {project.year}
                   </span>
+                  {project.status === "ongoing" && (
+                    <span className="flex items-center gap-1.5 rounded-full bg-signal px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md">
+                      <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-white" />
+                      Ongoing
+                    </span>
+                  )}
                 </div>
 
                 <div className="absolute right-6 top-6 z-20 flex gap-2">
@@ -155,10 +157,7 @@ export default function ProjectsSection() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="mb-2 text-2xl font-black uppercase tracking-tighter transition-colors group-hover:text-signal md:text-3xl">
-                    <Link 
-                      href={project.visual === "shot" && !project.image && project.websiteUrl ? project.websiteUrl : `/projects/${project.slug}`}
-                      target={project.visual === "shot" && !project.image && project.websiteUrl ? "_blank" : undefined}
-                    >
+                    <Link {...linkFor(project)}>
                       {project.name}
                     </Link>
                   </h3>

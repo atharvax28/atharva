@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next";
 
+import { profile } from "@/data/profile";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -9,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/"],
       },
     ],
-    sitemap: "https://atharvadev.athutayade.workers.dev/sitemap.xml",
+    sitemap: `${profile.site}/sitemap.xml`,
   };
 }
